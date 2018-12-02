@@ -1,0 +1,74 @@
+﻿@model Venkat.Models.Employe
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Employe</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UrlImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UrlImage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AltImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AltImage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblDepartment.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblDepartment.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdEmployee }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
