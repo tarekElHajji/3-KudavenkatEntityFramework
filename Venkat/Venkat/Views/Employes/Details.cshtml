@@ -47,15 +47,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UrlImage)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AltImage)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AltImage)
+            @Html.Image(Model.UrlImage, Model.AltImage);
         </dd>
 
         <dt>
