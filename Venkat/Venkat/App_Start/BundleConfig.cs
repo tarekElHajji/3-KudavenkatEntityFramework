@@ -26,6 +26,14 @@ namespace Venkat
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            //js    
+            bundles.Add(new ScriptBundle("~/bundles/jqueryUiJs").Include(
+                      "~/Scripts/jquery-ui-{version}.js"));
+
+            //css    
+            bundles.Add(new StyleBundle("~/Content/jqueryUiCss").Include(
+                   "~/Content/themes/base/jquery-ui.css"));
         }
     }
 }
