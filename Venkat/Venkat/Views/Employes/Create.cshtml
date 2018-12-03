@@ -4,13 +4,44 @@
     ViewBag.Title = "Create";
 }
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @Scripts.Render("~/bundles/jqueryUiJs")
+    @Styles.Render("~/Content/jqueryUiCss")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[type=datetime]').datepicker({
+                dateFormat: "dd/mm/yy"
+            });
+
+        });
+
+        $.validator.addMethod('date', function (value, element) {
+            if (this.optional(element)) {
+                return true;
+            }
+            var valid = true;
+            try {
+                $.datepicker.parseDate('dd/mm/yy', value);
+            }
+            catch (err) {
+                valid = false;
+            }
+            return valid;
+        });
+    </script>
+
+}
+
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Employe</h4>
         <hr />
@@ -25,8 +56,21 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <!--<div class="col-md-10">
+                @Html.DropDownList("Gender", new List<SelectListItem>{
+                    new SelectListItem { Text="Male", Value="Male" },
+                    new SelectListItem { Text="Female", Value="Female" }
+                }, "select Gender", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+            </div>-->
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="radio-inline">
+                    @Html.RadioButtonFor(model => model.Gender, "Male") Male
+                </div>
+                <div class="radio-inline">
+                    @Html.RadioButtonFor(model => model.Gender, "Female") Female
+                </div>
+                <br />
                 @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -48,17 +92,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DepartmentId, "DepartmentId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("DepartmentId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.UrlImage, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.UrlImage, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.UrlImage, new { htmlAttributes = new { @class = "form-control " } })
                 @Html.ValidationMessageFor(model => model.UrlImage, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -66,8 +102,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.AltImage, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.AltImage, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.AltImage, new { htmlAttributes = new { @class = "form-control " } })
                 @Html.ValidationMessageFor(model => model.AltImage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DepartmentId, "Department", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("DepartmentId", null, "select a department", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -82,7 +126,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
