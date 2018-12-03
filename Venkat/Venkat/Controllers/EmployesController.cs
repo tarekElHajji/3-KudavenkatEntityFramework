@@ -138,5 +138,18 @@ namespace Venkat.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult EmployeeByDepartment()
+        {
+            var employees = db.tblEmploye.Include("tblDepartment")
+                                       .GroupBy(x => x.tblDepartment.Name)
+                                        .Select(y => new EmployeeByDepartment
+                                        {
+                                            Name = y.Key,
+                                            Total = y.Count()
+                                        }).ToList().OrderByDescending(y => y.Total);
+            return View(employees);
+
+        }
     }
 }

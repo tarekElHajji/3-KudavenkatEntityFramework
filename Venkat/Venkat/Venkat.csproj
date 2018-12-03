@@ -179,6 +179,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeeEntity.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmployesByDepartment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -285,6 +286,7 @@
     <Content Include="Views\Employes\Details.cshtml" />
     <Content Include="Views\Employes\Edit.cshtml" />
     <Content Include="Views\Employes\Index.cshtml" />
+    <Content Include="Views\Employes\EmployeeByDepartment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

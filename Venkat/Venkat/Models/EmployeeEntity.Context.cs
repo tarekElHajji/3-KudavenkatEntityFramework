@@ -27,5 +27,7 @@ namespace Venkat.Models
     
         public virtual DbSet<Employe> tblEmploye { get; set; }
         public virtual DbSet<Department> tblDepartment { get; set; }
+
+        public System.Data.Entity.DbSet<Venkat.Models.EmployeeByDepartment> EmployeeByDepartments { get; set; }
     }
 }
