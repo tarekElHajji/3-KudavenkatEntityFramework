@@ -15,6 +15,7 @@ namespace Venkat.Models
     {
         [Required]
         public int IdEmployee { get; set; }
+        [Required]
         public string Name { get; set; }
         [Required]
         public string Gender { get; set; }

@@ -84,9 +84,19 @@ namespace Venkat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IdEmployee,Name,Gender,City,DateOfBirth,DepartmentId,UrlImage,AltImage")] Employe employe)
         {
+           Employe employeeFromDB = db.tblEmploye.Single(emp => emp.IdEmployee == employe.IdEmployee);
+
+            employeeFromDB.IdEmployee = employe.IdEmployee;
+            employeeFromDB.Gender = employe.Gender;
+            employeeFromDB.City = employe.City;
+            employeeFromDB.DateOfBirth = employe.DateOfBirth;
+            employeeFromDB.UrlImage = employe.UrlImage;
+            employeeFromDB.AltImage = employe.AltImage;
+            employeeFromDB.DepartmentId = employe.DepartmentId;
+
             if (ModelState.IsValid)
             {
-                db.Entry(employe).State = EntityState.Modified;
+                db.Entry(employeeFromDB).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
