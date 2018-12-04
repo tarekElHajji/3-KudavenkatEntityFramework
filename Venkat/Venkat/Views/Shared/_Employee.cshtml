@@ -1,0 +1,30 @@
+﻿@model Venkat.Models.Employe
+
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Gender)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.City)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.DateOfBirth)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.UrlImage)
+    </td>
+    <td>
+        @Html.DisplayFor(modelModel => Model.AltImage)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.tblDepartment.Name)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.IdEmployee }) |
+        @Html.ActionLink("Details", "Details", new { id = Model.IdEmployee }) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.IdEmployee })
+    </td>
+</tr>
