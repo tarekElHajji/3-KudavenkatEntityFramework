@@ -10,6 +10,13 @@
 <div>
     <h4>Employe</h4>
     <hr />
+    @section Menu
+    {
+        <br /><br /><br /><br /><br /><br /><br />
+        <h3>@Html.ActionLink("List", "index") </h3><br />
+        <h3> @Html.ActionLink("Edit", "Edit", new { id = Model.IdEmployee }) </h3><br />
+        <h3> @Html.ActionLink("Details", "Details", new { id = Model.IdEmployee }) </h3> <br />
+    }
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -69,12 +76,12 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>

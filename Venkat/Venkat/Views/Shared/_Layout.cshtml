@@ -28,8 +28,24 @@
         </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
-        <hr />
+        <div class="row">
+            @if (IsSectionDefined("Menu"))
+            {
+                <div class="col-md-2">
+                    @RenderSection("Menu")
+
+                </div>
+                <div class="col-md-10">
+                    @RenderBody()
+                    <hr />
+                </div>
+            }
+            else
+            {
+                @RenderBody()
+            }
+        </div>
+
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
