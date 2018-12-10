@@ -35,18 +35,18 @@
 
 }
 
-<h2>Create</h2>
+@section Menu
+    {
+    <br /><br /><br /><br /><br /><br /><br />
+    <h3>@Html.ActionLink("List", "index") </h3><br />
+}
 
+<h2>Create</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    @section Menu
-    {
-        <br /><br /><br /><br /><br /><br /><br />
-        <h3>@Html.ActionLink("List", "index") </h3><br />
-    }
     <div class="form-horizontal">
         <h4>Employe</h4>
         <hr />

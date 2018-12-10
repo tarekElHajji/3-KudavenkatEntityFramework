@@ -4,19 +4,20 @@
     ViewBag.Title = "Edit";
 }
 
+@section Menu
+    {
+    <br /><br /><br /><br /><br /><br /><br />
+    <h3>@Html.ActionLink("List", "index") </h3><br />
+    <h3> @Html.ActionLink("Details", "Details", new { id = Model.IdEmployee }) </h3><br />
+    <h3> @Html.ActionLink("Delete", "Delete", new { id = Model.IdEmployee }) </h3> <br />
+}
 <h2>Edit</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    @section Menu
-    {
-        <br /><br /><br /><br /><br /><br /><br />
-        <h3>@Html.ActionLink("List", "index") </h3><br />
-        <h3> @Html.ActionLink("Details", "Details", new { id = Model.IdEmployee }) </h3><br />
-        <h3> @Html.ActionLink("Delete", "Delete", new { id = Model.IdEmployee }) </h3> <br />
-    }
+
 
     <div class="form-horizontal">
         <h4>Employe</h4>

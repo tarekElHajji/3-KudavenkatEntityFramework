@@ -15,10 +15,23 @@ namespace Venkat.Controllers
         private EmployeeEntitie db = new EmployeeEntitie();
 
         // GET: Employes
-        public ActionResult Index()
+        public ActionResult Index(string searchBy, string search )
         {
-            var tblEmploye = db.tblEmploye.Include(e => e.tblDepartment);
-            return View(tblEmploye.ToList());
+            List<Employe> tblEmploye = new List<Employe>();
+            if (searchBy == "name")
+            {
+                tblEmploye = db.tblEmploye.Where(x => x.Name.StartsWith(search) || search == null).Include(e => e.tblDepartment).ToList();
+            }
+            else if (searchBy == "gender")
+            {
+                tblEmploye = db.tblEmploye.Where(x => x.Gender == search || search == null).Include(e => e.tblDepartment).ToList();
+            }
+            else
+            {
+                tblEmploye = db.tblEmploye.Include(e => e.tblDepartment).ToList();
+
+            }
+            return View(tblEmploye);
         }
 
         // GET: Employes/Details/5
