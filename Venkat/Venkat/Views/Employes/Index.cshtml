@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Venkat.Models.Employe>
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Venkat.Models.Employe>
 
 @{
     ViewBag.Title = "Index";
@@ -10,12 +13,10 @@
     <div class="col-md-8">
         @using (Html.BeginForm("Index", "Employes", FormMethod.Get))
         {
-            //@Html.AntiForgeryToken()
-
             <b>Search By</b>
             @Html.RadioButton("searchBY", "name", true) <text>Name</text>
             @Html.RadioButton("searchBY", "gender")<text>Gender</text> <br />
-            @Html.TextBox("search")
+            @Html.TextBox("searchText")
             <input type="submit" name="search" value="Search" />
         }
     </div>
@@ -28,25 +29,25 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.First().Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Gender)
+            @Html.DisplayNameFor(model => model.First().Gender)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.City)
+            @Html.DisplayNameFor(model => model.First().City)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateOfBirth)
+            @Html.DisplayNameFor(model => model.First().DateOfBirth)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UrlImage)
+            @Html.DisplayNameFor(model => model.First().UrlImage)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AltImage)
+            @Html.DisplayNameFor(model => model.First().AltImage)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.tblDepartment.Name)
+            @Html.DisplayNameFor(model => model.First().tblDepartment.Name)
         </th>
         <th>Action</th>
     </tr>
@@ -66,7 +67,6 @@
             @Html.Partial("_Employee", item)
         }
     }
-
-
-
 </table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy=Request.QueryString["searchBy"], searchText=Request.QueryString["searchText"] }))

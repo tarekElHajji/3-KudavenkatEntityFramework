@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Venkat.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Venkat.Controllers
 {
@@ -15,20 +17,22 @@ namespace Venkat.Controllers
         private EmployeeEntitie db = new EmployeeEntitie();
 
         // GET: Employes
-        public ActionResult Index(string searchBy, string search )
+        public ActionResult Index(string searchBy, string searchText, int? page )
         {
-            List<Employe> tblEmploye = new List<Employe>();
+            IPagedList<Employe> tblEmploye;
             if (searchBy == "name")
             {
-                tblEmploye = db.tblEmploye.Where(x => x.Name.StartsWith(search) || search == null).Include(e => e.tblDepartment).ToList();
+                tblEmploye = db.tblEmploye.Where(x => x.Name.StartsWith(searchText) || searchText == null)
+                             .Include(e => e.tblDepartment).ToList().ToPagedList(page ?? 1 ,3);
             }
             else if (searchBy == "gender")
             {
-                tblEmploye = db.tblEmploye.Where(x => x.Gender == search || search == null).Include(e => e.tblDepartment).ToList();
+                tblEmploye = db.tblEmploye.Where(x => x.Gender == searchText || searchText == null)
+                .Include(e => e.tblDepartment).ToList().ToPagedList(page ?? 1 , 3);
             }
             else
             {
-                tblEmploye = db.tblEmploye.Include(e => e.tblDepartment).ToList();
+                tblEmploye = db.tblEmploye.Include(e => e.tblDepartment).ToList().ToPagedList(page ?? 1, 3);
 
             }
             return View(tblEmploye);
