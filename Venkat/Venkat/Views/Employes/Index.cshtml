@@ -29,13 +29,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.First().Name)
+            @Html.ActionLink("Name","Index", new { sortBy = ViewBag.sortByNameParameter,
+                                searchBy = Request["searchBy"], searchText = Request["searchText"], page = Request["page"] })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.First().Gender)
+            @Html.ActionLink("Gender","Index", new { sortBy = ViewBag.sortByGenderParameter,
+                                searchBy = Request["searchBy"], searchText = Request["searchText"], page = Request["page"] })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.First().City)
+            @Html.ActionLink("City","Index", new { sortBy = ViewBag.sortByCityParameter,
+                                searchBy = Request["searchBy"], searchText = Request["searchText"], page = Request["page"] })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.First().DateOfBirth)
@@ -69,4 +72,5 @@
     }
 </table>
 
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy=Request.QueryString["searchBy"], searchText=Request.QueryString["searchText"] }))
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy=Request.QueryString["searchBy"],
+                                        searchText =Request.QueryString["searchText"], sortBy = Request["sortBy"] }))

@@ -17,25 +17,47 @@ namespace Venkat.Controllers
         private EmployeeEntitie db = new EmployeeEntitie();
 
         // GET: Employes
-        public ActionResult Index(string searchBy, string searchText, int? page )
+        public ActionResult Index(string searchBy, string searchText, int? page, string sortBy )
         {
-            IPagedList<Employe> tblEmploye;
+            ViewBag.sortByNameParameter = string.IsNullOrEmpty(sortBy) ? "name dsc": "";
+            ViewBag.sortByGenderParameter = sortBy == "gender" ? "gender dsc" : "gender";
+            ViewBag.sortByCityParameter = sortBy == "city" ? "city dsc" : "city";
+
+            IQueryable<Employe> employes = db.tblEmploye;
             if (searchBy == "name")
             {
-                tblEmploye = db.tblEmploye.Where(x => x.Name.StartsWith(searchText) || searchText == null)
-                             .Include(e => e.tblDepartment).ToList().ToPagedList(page ?? 1 ,3);
+                employes = employes.Where(x => (x.Name.StartsWith(searchText)) || (searchText == null))
+                             .Include(e => e.tblDepartment);
             }
             else if (searchBy == "gender")
             {
-                tblEmploye = db.tblEmploye.Where(x => x.Gender == searchText || searchText == null)
-                .Include(e => e.tblDepartment).ToList().ToPagedList(page ?? 1 , 3);
+                employes = employes.Where(x => (x.Gender == searchText) || (searchText == "") || (searchText == null))
+                .Include(e => e.tblDepartment);
             }
             else
             {
-                tblEmploye = db.tblEmploye.Include(e => e.tblDepartment).ToList().ToPagedList(page ?? 1, 3);
+                employes = employes.Include(e => e.tblDepartment);
 
             }
-            return View(tblEmploye);
+
+            switch (sortBy)
+            {
+                case "name dsc": employes = employes.OrderByDescending(x => x.Name);
+                    break;
+                case "gender dsc": employes = employes.OrderByDescending(x => x.Gender);
+                    break;
+                case "gender": employes = employes.OrderBy(x => x.Gender);
+                    break;
+                case "city dsc":
+                    employes = employes.OrderByDescending(x => x.City);
+                    break;
+                case "city":
+                    employes = employes.OrderBy(x => x.City);
+                    break;
+                default: employes = employes.OrderBy(x => x.Name);
+                    break;
+            }
+            return View(employes.ToPagedList(page ?? 1, 3));
         }
 
         // GET: Employes/Details/5
