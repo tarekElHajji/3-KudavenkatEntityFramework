@@ -159,7 +159,7 @@ namespace Venkat.Controllers
         }
 
         // POST: Employes/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -189,6 +189,21 @@ namespace Venkat.Controllers
                                         }).ToList().OrderByDescending(y => y.Total);
             return View(employees);
 
+        }
+
+        [HttpPost]
+        public ActionResult Delete(IEnumerable<int> toDeleteEmployesIds)
+        {
+
+            foreach (var id in toDeleteEmployesIds)
+            {
+                var employee = db.tblEmploye.Single(e => e.IdEmployee == id);
+
+                db.tblEmploye.Remove(employee);
+            }
+
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

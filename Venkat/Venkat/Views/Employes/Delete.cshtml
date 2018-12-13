@@ -76,7 +76,7 @@
 
     </dl>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("DeleteConfirmed", "employes", new { id = Model.IdEmployee }, FormMethod.Post))
     {
         @Html.AntiForgeryToken()
 

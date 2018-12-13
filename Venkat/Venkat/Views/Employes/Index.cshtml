@@ -26,19 +26,39 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm("Delete", "Employes", FormMethod.Post))
+{
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Name","Index", new { sortBy = ViewBag.sortByNameParameter,
-                                searchBy = Request["searchBy"], searchText = Request["searchText"], page = Request["page"] })
+            Select to delete
         </th>
         <th>
-            @Html.ActionLink("Gender","Index", new { sortBy = ViewBag.sortByGenderParameter,
-                                searchBy = Request["searchBy"], searchText = Request["searchText"], page = Request["page"] })
+            @Html.ActionLink("Name", "Index", new
+       {
+           sortBy = ViewBag.sortByNameParameter,
+           searchBy = Request["searchBy"],
+           searchText = Request["searchText"],
+           page = Request["page"]
+       })
         </th>
         <th>
-            @Html.ActionLink("City","Index", new { sortBy = ViewBag.sortByCityParameter,
-                                searchBy = Request["searchBy"], searchText = Request["searchText"], page = Request["page"] })
+            @Html.ActionLink("Gender", "Index", new
+       {
+           sortBy = ViewBag.sortByGenderParameter,
+           searchBy = Request["searchBy"],
+           searchText = Request["searchText"],
+           page = Request["page"]
+       })
+        </th>
+        <th>
+            @Html.ActionLink("City", "Index", new
+       {
+           sortBy = ViewBag.sortByCityParameter,
+           searchBy = Request["searchBy"],
+           searchText = Request["searchText"],
+           page = Request["page"]
+       })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.First().DateOfBirth)
@@ -58,7 +78,7 @@
     @if (Model.Count() == 0)
     {
         <tr>
-            <td colspan="7">
+            <td colspan="8">
                 No rows match search criteria
             </td>
         </tr>
@@ -72,5 +92,9 @@
     }
 </table>
 
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy=Request.QueryString["searchBy"],
-                                        searchText =Request.QueryString["searchText"], sortBy = Request["sortBy"] }))
+ <input type="submit" value="delete selected rows" />
+}
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["searchBy"],
+    searchText = Request.QueryString["searchText"], sortBy = Request["sortBy"]}))
+    
