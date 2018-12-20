@@ -16,6 +16,7 @@ namespace Venkat.Models
         [Required]
         public int IdEmployee { get; set; }
         [Required]
+        [RegularExpression(@"^(([A-za-z]+[\s]{1}[A-za-z]+)|([A-Za-z]+))$")]
         public string Name { get; set; }
         [Required]
         public string Gender { get; set; }
